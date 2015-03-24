@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+<<<<<<< HEAD
+=======
+var users = require('./routes/users');
+>>>>>>> initial express/node/pg install
 
 var app = express();
 
@@ -22,6 +26,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+<<<<<<< HEAD
+=======
+app.use('/users', users);
+>>>>>>> initial express/node/pg install
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

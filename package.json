@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "full-solar",
+=======
+  "name": "demo-solar",
+>>>>>>> initial express/node/pg install
   "version": "0.0.0",
   "private": true,
   "scripts": {
