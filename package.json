@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "name": "full-solar",
 =======
   "name": "demo-solar",
@@ -18,4 +19,11 @@
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
   }
+=======
+    "name": "express-router-experiments",
+    "main": "server.js",
+    "dependencies": {
+        "express": "~4.0.0"
+    }
+>>>>>>> ripping the express model
 }
