@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mqtt    = require('mqtt');
 
-var client  = mqtt.connect('mqtt://test.mosquitto.org');
- 
+var mqttCustomer = require('./mqtt.js');
+mqttCustomer.connectMQTT();
+
 var routes = require('./routes/index');
 
 var app = express();
