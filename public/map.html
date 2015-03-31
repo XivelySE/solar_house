@@ -3,7 +3,7 @@
     <head>
 
         <style type="text/css">
-          html, body, #map-canvas { height: 100%; width: 100%; margin: 0; padding: 0;}
+          html, body, #map-canvas { height: 600px; width: 100%; margin: 0; padding: 0;}
         </style>
 
         <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -16,14 +16,49 @@
 
         <script type="text/javascript">
 
+            var map = null;
+
             $(function(){
 
                 $.get( "/markers", function( data ) {
-                    //$( ".result" ).html( data );
-                    console.log(data);
-                    //alert( "Load was performed." );
-                });                
 
+                    var bounds = new google.maps.LatLngBounds();
+                    $.each(data, function(index, elem){
+
+                        console.log(elem.latitude);
+                        console.log(elem.longitude);                        
+
+                        var marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(elem.latitude, elem.longitude),
+                            map: map,
+                            // icon: markerIcon,
+                            //optimized: false,
+                            animation: google.maps.Animation.DROP,
+                        });
+
+                        bounds.extend(marker.getPosition());
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: "<p>" + elem.content + "</p>",
+                            maxWidth: 280,
+                            maxHeight: 200
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.open(map, marker);
+
+                            if (marker.getAnimation() != null) {
+                                marker.setAnimation(null);
+                            }
+                        });                    
+
+                        map.setCenter(marker.getPosition());
+
+                    });
+
+                    map.fitBounds(bounds);
+                    
+                });             
 
             });
 
@@ -36,7 +71,7 @@
                         lng: -26.02957
                     },
                     clickableLabels: false,
-                    zoom: 8,
+                    zoom: 15,
                     disableDefaultUI: true,
                     styles: [
                         { "stylers": [ { "hue": "#dd0d0d" } ] },
@@ -67,7 +102,7 @@
                         }
                     ]};
 
-                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
             }            
 
@@ -82,12 +117,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" style="text-align:center">
-                    <h1>Demo Map</h1>
+                    <h1>Solar Demo</h1>
                 </div>
+            </div>
+
+            <div id="map-canvas"></div>
+
+            <div class="row" style="margin-bottom:20px;height:20px">
+                
             </div>
         </div>
 
-        <div id="map-canvas"></div>
     </body>
 
 </html>

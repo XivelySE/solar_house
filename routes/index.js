@@ -3,7 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-<<<<<<< HEAD
 
     res.render('index', {
         title: 'Express'
@@ -11,9 +10,9 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/entity/:id', function(req, res, next) {
+router.get('/locations/:id', function(req, res, next) {
 
-    res.send("Hello " + req.params.id);
+    res.send("Location " + req.params.id);
 });
 
 /* GET home page. */
@@ -22,17 +21,17 @@ router.get('/markers', function(req, res, next) {
     var pg = require('pg');
 
     var pgClient = new pg.Client({
-        user: "eoyljjhgdlmcde",
-        password: "xXDn5k8z949vwV47S_TIYYn6-k",
-        database: "d7eiah1skfh763",
+        user: "putujooxlyfpep",
+        password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
+        database: "d2incm6jg4v8nm",
         port: 5432,
-        host: "ec2-107-22-173-230.compute-1.amazonaws.com",
+        host: "ec2-23-21-73-32.compute-1.amazonaws.com",
         ssl: true
     }); 
 
     pgClient.connect();    
 
-    pgClient.query('SELECT * FROM houses', function(err, result) {
+    pgClient.query('SELECT * FROM locations', function(err, result) {
         //call `done()` to release the client back to the pool
         //done();
 
@@ -42,11 +41,12 @@ router.get('/markers', function(req, res, next) {
         }
         else {
 
+            console.log(result.rows[0]);
+
             //output: 1
             pgClient.end();
 
-            console.log(result.rows[0]);
-            res.send(result.rows[0]);
+            res.send(result.rows);
         }
     });
     
@@ -55,14 +55,43 @@ router.get('/markers', function(req, res, next) {
 /* POST Marker. */
 router.post('/markers', function(req, res, next) {
 
+    //locations
+    //
+
     console.log(req);
-    
+
+    var pg = require('pg');
+
+    var pgClient = new pg.Client({
+        user: "putujooxlyfpep",
+        password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
+        database: "d2incm6jg4v8nm",
+        port: 5432,
+        host: "ec2-23-21-73-32.compute-1.amazonaws.com",
+        ssl: true
+    }); 
+
+    pgClient.connect();    
+
+    pgClient.query('INSERT INTOlocations  VALUES()', function(err, result) {
+        //call `done()` to release the client back to the pool
+        //done();
+
+        if (err) { 
+            //return console.error('error running query', err);
+            res.send('error running query ' + err);
+        }
+        else {
+
+            console.log(result.rows[0]);
+
+            //output: 1
+            pgClient.end();
+
+            res.send(result.rows);
+        }
+    }); 
+
 });
 
 module.exports = router;
-=======
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
->>>>>>> initial express/node/pg install

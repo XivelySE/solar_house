@@ -1,8 +1,0 @@
-
-exports.helloWorld =  function() {
-
-
-}   
-
-
-
