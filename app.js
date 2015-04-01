@@ -10,6 +10,8 @@ mqttCustomer.connectMQTT();
 
 var routes = require('./routes/index');
 
+global.__base = __dirname + '/';
+
 var app = express();
 
 // view engine setup
