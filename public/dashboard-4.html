@@ -68,7 +68,7 @@ $(function () {
                 }
             },
             title: {
-                text: 'Battery Voltage'
+                text: 'Solar Panel Output (watts)'
             },
             xAxis: {
                 type: 'datetime',
@@ -135,7 +135,7 @@ $(function () {
                 }
             },
             title: {
-                text: 'Panel Current'
+                text: 'Building Consumption (watts)'
             },
             xAxis: {
                 type: 'datetime',
@@ -246,13 +246,67 @@ $(function () {
         }
     };
 
+    var gaugeOptionsBattery = {
+        chart: {
+            type: 'solidgauge'
+        },
+
+        title: null,
+
+        pane: {
+            center: ['50%', '85%'],
+            size: '100%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
+        },
+
+        tooltip: {
+            enabled: false
+        },
+
+        // the value axis
+        yAxis: {
+            stops: [
+                [0.2, '#DF5353'], // red
+                [0.5, '#DDDF0D'], // yellow
+                [0.9, '#55BF3B'] // green
+            ],
+            lineWidth: 0,
+            minorTickInterval: null,
+            tickPixelInterval: 400,
+            tickWidth: 0,
+            title: {
+                y: -70
+            },
+            labels: {
+                y: 16
+            }
+        },
+
+        plotOptions: {
+            solidgauge: {
+                dataLabels: {
+                    y: 5,
+                    borderWidth: 0,
+                    useHTML: true
+                }
+            }
+        }
+    };
+
     // The Panel Temperature
-    $('#container-panel-temp').highcharts(Highcharts.merge(gaugeOptions, {
+    $('#container-panel-temp').highcharts(Highcharts.merge(gaugeOptionsBattery, {
         yAxis: {
             min: 0,
-            max: 200,
+            max: 1000,
             title: {
-                text: 'Solar Panel Watts'
+                text: 'Solar Panel Output (watts)'
             }
         },
 
@@ -266,22 +320,22 @@ $(function () {
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">C</span></div>'
+                       '<span style="font-size:12px;color:silver">watts</span></div>'
             },
             tooltip: {
-                valueSuffix: ' degree &#176; C'
+                valueSuffix: ' watts'
             }
         }]
 
     }));
 
-    // The Panel Speed
-    $('#container-speed').highcharts(Highcharts.merge(gaugeOptions, {
+    // The Panel Battery Level
+    $('#container-speed').highcharts(Highcharts.merge(gaugeOptionsBattery, {
         yAxis: {
             min: 0,
-            max: 200,
+            max: 100,
             title: {
-                text: 'Speed'
+                text: 'Battery Level'
             }
         },
 
@@ -295,7 +349,7 @@ $(function () {
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">km/h</span></div>'
+                       '<span style="font-size:12px;color:silver">% Charged</span></div>'
             },
             tooltip: {
                 valueSuffix: ' &#176;/h'
@@ -310,7 +364,7 @@ $(function () {
             min: 0,
             max: 5,
             title: {
-                text: 'RPM'
+                text: 'Bulding Electrical Consumption'
             }
         },
 
@@ -320,7 +374,7 @@ $(function () {
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+                       '<span style="font-size:12px;color:silver">watts</span></div>'
             },
             tooltip: {
                 valueSuffix: ' revolutions/min'
@@ -566,12 +620,12 @@ $(function () {
 									<span class="title">World View</span>
 								</a>
 							</li>
-							<li>
+							<li class="active">
 								<a href="dashboard-4.html">
 									<span class="title">Location Details</span>
 								</a>
 							</li>
-							<li class="active">
+							<li>
 								<a href="dashboard-4.html">
 									<span class="title">Alerts and Errors</span>
 								</a>
@@ -1001,13 +1055,13 @@ $(function () {
 
 				<div class="col-sm-3">
 
-					<div class="xe-widget xe-counter" data-count=".num" data-from="0" data-to="99.9" data-suffix="%" data-duration="2">
+					<div class="xe-widget xe-counter" data-count=".num" data-from="0" data-to="83.6" data-suffix="&deg;" data-duration="2">
 						<div class="xe-icon">
 							<i class="linecons-cloud"></i>
 						</div>
 						<div class="xe-label">
-							<strong class="num">0.0%</strong>
-							<span>Server uptime</span>
+							<strong class="num">83.6</strong>
+							<span>Outside Temperature</span>
 						</div>
 					</div>
 
@@ -1015,41 +1069,42 @@ $(function () {
 
 				<div class="col-sm-3">
 
-					<div class="xe-widget xe-counter xe-counter-blue" data-count=".num" data-from="1" data-to="117" data-suffix="k" data-duration="3" data-easing="false">
+					<div class="xe-widget xe-counter xe-counter-blue" data-count=".num" data-from="1" data-to="85" data-suffix="&deg;" data-duration="3" data-easing="false">
 						<div class="xe-icon">
-							<i class="linecons-user"></i>
+							<i class="fa-columns"></i>
 						</div>
 						<div class="xe-label">
-							<strong class="num">1k</strong>
-							<span>Users Total</span>
+							<strong class="num">87.4</strong>
+							<span>Panel Temperature</span>
 						</div>
 					</div>
 
 				</div>
 
 				<div class="col-sm-3">
-
+                    
 					<div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="1000" data-to="2470" data-duration="4" data-easing="true">
+
 						<div class="xe-icon">
 							<i class="linecons-camera"></i>
 						</div>
 						<div class="xe-label">
-							<strong class="num">1000</strong>
-							<span>New Daily Photos</span>
+							<strong class="num">Panel / Battery / Grid</strong>
+							<span>Electrical Source</span>
 						</div>
 					</div>
-
+                
 				</div>
 
 				<div class="col-sm-3">
 
-					<div class="xe-widget xe-counter xe-counter-red"  data-count=".num" data-from="0" data-to="57" data-prefix="-," data-suffix="%" data-duration="5" data-easing="true" data-delay="1">
+					<div class="xe-widget xe-counter xe-counter-green"  data-count=".num" data-from="0" data-to="97.5" data-prefix="" data-suffix="%" data-duration="5" data-easing="true" data-delay="1">
 						<div class="xe-icon">
-							<i class="linecons-lightbulb"></i>
+							<i class="fa-check"></i>
 						</div>
 						<div class="xe-label">
-							<strong class="num">-,0%</strong>
-							<span>Exchange Commission</span>
+							<strong class="num">95%</strong>
+							<span>System Status - Optimal</span>
 						</div>
 					</div>
 
