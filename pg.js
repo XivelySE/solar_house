@@ -1,6 +1,6 @@
 var pg = require('pg');
 
-exports.saveValue = function(panelId, settingType, settingValue) {
+exports.saveSetting = function(panelId, settingType, settingValue) {
 
     var pgClient = new pg.Client({
         user: "putujooxlyfpep",
@@ -13,18 +13,16 @@ exports.saveValue = function(panelId, settingType, settingValue) {
 
     pgClient.connect();
 
-    var query = 'INSERT INTO locationlogs(locationid, panelid, settingtype, settingvalue) values($1, $2, $3, $4)';
+    var query = 'INSERT INTO locationlogs(locationid, panelid, settingtype, settingvalue, timestamp) values($1, $2, $3, $4, $5)';
 
-    pgClient.query(query, ['1', panelId, settingType, settingValue], function(err, result) {
+    pgClient.query(query, ['1', panelId, settingType, settingValue, new Date()], function(err, result) {
 
         if (err) {
-
             console.log(err);
             throw err;
         }
         else {
-
-            console.log(result);
+            //console.log(result);
             pgClient.end();
         }
 
@@ -45,9 +43,8 @@ exports.getMeasures = function(settingType, success, error) {
 
     pgClient.connect();
 
-    pgClient.query('SELECT * FROM locationlogs WHERE panelid = $1 AND settingtype = $2 LIMIT 1',['1', settingType], function(err, result) {
-        //call `done()` to release the client back to the pool
-        //done();
+    pgClient.query('SELECT timestamp, settingtype, settingvalue FROM locationlogs WHERE settingtype = $1 ORDER BY timestamp DESC LIMIT 1',
+                    [settingType], function(err, result) {
 
         if (err) {
 
@@ -56,7 +53,7 @@ exports.getMeasures = function(settingType, success, error) {
         }
         else {
             pgClient.end();
-            success(result.rows);
+            success(result.rows[0]);
         }
     });
 }

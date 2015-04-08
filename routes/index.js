@@ -9,28 +9,6 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/markers/:id/panel/current', function(req, res, next) {
-
-    pg.getMeasures('panelcurrent', function(rows) {
-
-        console.log('panelcurrent:');
-        console.log(rows);
-
-        res.send(rows);
-    });
-});
-
-router.get('/markers/:id/battery/voltage', function(req, res, next) {
-
-    pg.getMeasures('batteryvoltage', function(rows) {
-
-        console.log('batteryvoltage:');
-        console.log(rows);
-
-        res.send(rows);
-    });
-});
-
 /* GET home page. */
 router.get('/markers', function(req, res, next) {
 
@@ -44,5 +22,70 @@ router.get('/markers', function(req, res, next) {
     });
 
 });
+
+// GET MEASURE ROUTES
+
+// Battery Current
+router.get('/markers/batterycurrent', function(req, res, next) {
+
+    pg.getMeasures('BatteryCurrent', function(rows) {
+
+        console.log('BatteryCurrent:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+// Appliance Current - OK
+router.get('/markers/appliancecurrent', function(req, res, next) {
+
+    pg.getMeasures('ApplianceCurrent', function(rows) {
+
+        console.log('ApplianceCurrent:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+
+
+// Backup Voltage - OK
+router.get('/markers/backupvoltage', function(req, res, next) {
+
+    pg.getMeasures('BackupVoltage', function(rows) {
+
+        console.log('BackupVoltage:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+// Battery Voltage - OK
+router.get('/markers/batteryvoltage', function(req, res, next) {
+
+    pg.getMeasures('BatteryVoltage', function(rows) {
+
+        console.log('BatteryVoltage:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+// Appliance Voltage - OK
+router.get('/markers/appliancevoltage', function(req, res, next) {
+
+    pg.getMeasures('ApplianceVoltage', function(rows) {
+
+        console.log('ApplianceVoltage:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
 
 module.exports = router;
