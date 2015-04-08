@@ -37,6 +37,19 @@ router.get('/markers/batterycurrent', function(req, res, next) {
     });
 });
 
+// Panel Current - OK
+router.get('/markers/panelcurrent', function(req, res, next) {
+
+    pg.getMeasures('PanelCurrent', function(rows) {
+
+        console.log('PanelCurrent:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+
 // Appliance Current - OK
 router.get('/markers/appliancecurrent', function(req, res, next) {
 
