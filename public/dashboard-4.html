@@ -43,6 +43,31 @@ chartTemp = undefined;
 
 $(function () {
 
+    $(".button-on").click(function(){
+
+        $.get("/button/on", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-off").show();
+    });
+
+    $(".button-off").click(function(){
+
+        $.get("/button/off", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-on").show();
+    });
+
+});
+
+
+$(function () {
+
     $(document).ready(function () {
         Highcharts.setOptions({
             global: {
@@ -1124,6 +1149,17 @@ $(function () {
 				</div>
 
                 <!-- DEMO -->
+
+                <div class="row">
+
+                    <div class="col-sm-4" style="margin: 1em 0em;"></div>
+                    <div class="col-sm-4" style="margin: 1em 0em;">
+                        <button class="button-on btn-block btn-info">Turn on the light</button>
+                        <button class="button-off btn-block btn-info" style="display:none">Turn off the light</button>
+                    </div>
+
+                </div>
+
 
                 <div class="col-sm-6" style="margin: 1em 0em;">
 

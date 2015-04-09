@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('../pg.js');
+var mqtt = require('../mqtt.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,15 +24,27 @@ router.get('/markers', function(req, res, next) {
 
 });
 
-// GET MEASURE ROUTES
+// TURN ON BUTTON
+router.get('/button/on', function(req, res, next) {
 
+    mqtt.switchLightON();
+    res.send('ok');
+});
+
+router.get('/button/off', function(req, res, next) {
+
+    mqtt.switchLightOFF();
+    res.send('ok');
+});
+
+// GET MEASURE ROUTES
 // Battery Current
 router.get('/markers/batterycurrent', function(req, res, next) {
 
     pg.getMeasures('BatteryCurrent', function(rows) {
 
-        console.log('BatteryCurrent:');
-        console.log(rows);
+        // console.log('BatteryCurrent:');
+        // console.log(rows);
 
         res.send(rows);
     });
@@ -42,8 +55,8 @@ router.get('/markers/appliancecurrent', function(req, res, next) {
 
     pg.getMeasures('ApplianceCurrent', function(rows) {
 
-        console.log('ApplianceCurrent:');
-        console.log(rows);
+        // console.log('ApplianceCurrent:');
+        // console.log(rows);
 
         res.send(rows);
     });
@@ -56,8 +69,8 @@ router.get('/markers/backupvoltage', function(req, res, next) {
 
     pg.getMeasures('BackupVoltage', function(rows) {
 
-        console.log('BackupVoltage:');
-        console.log(rows);
+        // console.log('BackupVoltage:');
+        // console.log(rows);
 
         res.send(rows);
     });
@@ -68,8 +81,8 @@ router.get('/markers/batteryvoltage', function(req, res, next) {
 
     pg.getMeasures('BatteryVoltage', function(rows) {
 
-        console.log('BatteryVoltage:');
-        console.log(rows);
+        // console.log('BatteryVoltage:');
+        // console.log(rows);
 
         res.send(rows);
     });
@@ -80,8 +93,8 @@ router.get('/markers/appliancevoltage', function(req, res, next) {
 
     pg.getMeasures('ApplianceVoltage', function(rows) {
 
-        console.log('ApplianceVoltage:');
-        console.log(rows);
+        // console.log('ApplianceVoltage:');
+        // console.log(rows);
 
         res.send(rows);
     });
