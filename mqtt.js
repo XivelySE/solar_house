@@ -50,7 +50,7 @@ exports.connectMQTT = function(req, res) {
             if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' &&
                   panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
 
-               pg.saveSetting(panelId, panelSetting, panelValue);
+               pg.saveSetting(panelId, panelSetting, panelValue.toFixed(2));
             }
          }
          catch(e) {

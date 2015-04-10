@@ -1,15 +1,15 @@
 var pg = require('pg');
 
-exports.saveSetting = function(panelId, settingType, settingValue) {
+var options = {
+    user: "putujooxlyfpep",
+    password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
+    database: "d2incm6jg4v8nm",
+    port: 5432,
+    host: "ec2-23-21-73-32.compute-1.amazonaws.com",
+    ssl: true
+}
 
-    options = {
-        user: "putujooxlyfpep",
-        password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
-        database: "d2incm6jg4v8nm",
-        port: 5432,
-        host: "ec2-23-21-73-32.compute-1.amazonaws.com",
-        ssl: true
-    }
+exports.saveSetting = function(panelId, settingType, settingValue) {
 
     pg.connect(options, function(err, pgClient, done) {
 
@@ -23,11 +23,6 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
                 console.log(err);
                 throw err;
             }
-            else {
-                //console.log(result);
-                pgClient.end();
-            }
-
         });
 
     });
@@ -35,60 +30,41 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
 
 exports.getMeasures = function(settingType, success, error) {
 
-    var pgClient = new pg.Client({
-        user: "putujooxlyfpep",
-        password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
-        database: "d2incm6jg4v8nm",
-        port: 5432,
-        host: "ec2-23-21-73-32.compute-1.amazonaws.com",
-        ssl: true
-    });
+    pg.connect(options, function(err, pgClient, done) {
 
-    pgClient.connect();
+        var query = 'SELECT timestamp, settingtype, settingvalue FROM locationlogs WHERE settingtype = $1 ORDER BY timestamp DESC LIMIT 1';
 
-    pgClient.query('SELECT timestamp, settingtype, settingvalue FROM locationlogs WHERE settingtype = $1 ORDER BY timestamp DESC LIMIT 1',
-                    [settingType], function(err, result) {
+        pgClient.query(query, [settingType], function(err, result) {
 
-        if (err) {
+            done();
 
-            pgClient.end();
-            error(err);
-        }
-        else {
-            pgClient.end();
-            success(result.rows[0]);
-        }
+            if (err) {
+                error(err);
+            }
+            else {
+                success(result.rows[0]);
+            }
+        });
+
     });
 }
 
 exports.getLocations = function(success, error) {
 
-    var pgClient = new pg.Client({
-        user: "putujooxlyfpep",
-        password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
-        database: "d2incm6jg4v8nm",
-        port: 5432,
-        host: "ec2-23-21-73-32.compute-1.amazonaws.com",
-        ssl: true
+    pg.connect(options, function(err, pgClient, done) {
+
+        pgClient.query('SELECT * FROM locations', function(err, result) {
+
+            done();
+
+            if (err) {
+                return err;
+            }
+            else {
+
+                success(result.rows);
+            }
+        });
+
     });
-
-    pgClient.connect();
-
-    pgClient.query('SELECT * FROM locations', function(err, result) {
-        //call `done()` to release the client back to the pool
-        //done();
-
-        if (err) {
-
-            pgClient.end();
-            return err;
-        }
-        else {
-
-            pgClient.end();
-            success(result.rows);
-
-        }
-    });
-
 }
