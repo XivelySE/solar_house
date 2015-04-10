@@ -6,6 +6,7 @@ var port = 1883;
 var username = "edd7358b-9505-44b5-ab93-04ec89de2dbc";
 var password = "lW4X8e3PDUF9iOBuAIgaXQ==";
 var topicPrefix = "/de289e01-cc13-11e4-a698-0a1f2727d969/solardemo/panel0001";
+// var topicPrefix = "/de289e01-cc13-11e4-a698-0a1f2727d969/solardemo/panel1008";
 
 var client = mqtt.connect({
    host: host,
@@ -28,29 +29,33 @@ exports.connectMQTT = function(req, res) {
 
       //console.log(topic);
       result = JSON.parse(message.toString());
+      // console.log(result);
 
-      for (i in result) {
+      for (i = 0; i < result.length; i ++) {
+
+         console.log(result[i]);
 
          try {
 
-            panelId = 1008;
-            panelValue = result[i].value;
-            panelSetting = result[i].variableName;
+            if (result[i].packetType == 'sensor') {
 
-            console.log(panelId + " " + panelSetting + " " + panelValue);
+               panelId = 1008;
+               panelValue = result[i].value;
+               panelSetting = result[i].variableName;
 
-            if (panelSetting == 'ErrorConditionON') {
-               console.log(panelId + " " + panelSetting + " " + panelValue);
-            }
+               if (panelSetting == 'ErrorConditionON') {
+                  console.log(panelId + " " + panelSetting + " " + panelValue);
+               }
 
-            if (panelSetting == 'ErrorConditionOFF') {
-               console.log(panelId + " " + panelSetting + " " + panelValue);
-            }
+               if (panelSetting == 'ErrorConditionOFF') {
+                  console.log(panelId + " " + panelSetting + " " + panelValue);
+               }
 
-            if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' &&
-                  panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
+               if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' &&
+                     panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
 
-               pg.saveSetting(panelId, panelSetting, panelValue.toFixed(2));
+                  pg.saveSetting(panelId, panelSetting, panelValue.toFixed(2));
+               }
             }
          }
          catch(e) {
