@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="assets/css/xenon-components.css">
     <link rel="stylesheet" href="assets/css/xenon-skins.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-
     <script src="assets/js/jquery-1.11.1.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -87,7 +86,7 @@ $(function () {
                         var series = this.series[0];
                         setInterval(function () {
 
-                            $.get('/markers/batterycurrent', function(data){
+                            $.get('/markers/panelcurrent', function(data){
 
                                 // console.log(data.timestamp);
 
@@ -101,7 +100,7 @@ $(function () {
                 }
             },
             title: {
-                text: 'Solar Panel Output (watts)'
+                text: 'Solar Panel Output (amps)'
             },
             xAxis: {
                 type: 'datetime',
@@ -109,7 +108,7 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'Watts'
+                    text: 'amps'
                 },
                 plotLines: [{
                     value: 0,
@@ -131,7 +130,7 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Voltage',
+                name: 'amps',
                 data: (function () {
                     // generate an array of random data
                     var data = [],
@@ -172,7 +171,7 @@ $(function () {
                 }
             },
             title: {
-                text: 'Building Consumption (watts)'
+                text: 'Building Consumption (amps)'
             },
             xAxis: {
                 type: 'datetime',
@@ -180,7 +179,7 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'Watts'
+                    text: 'amps'
                 },
                 plotLines: [{
                     value: 0,
@@ -202,7 +201,7 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'Current',
+                name: 'amps',
                 data: (function () {
                     // generate an array of random data
                     var data = [],
@@ -1124,7 +1123,7 @@ $(function () {
 					<div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" data-to="2100" data-duration="4" data-easing="true">
 
 						<div class="xe-icon">
-							<i class="linecons-camera"></i>
+							<i class="fa-calendar-o"></i>
 						</div>
 						<div class="xe-label">
 							<strong class="num">80</strong>
@@ -1197,15 +1196,15 @@ $(function () {
 
                 <div class="col-sm-3">
 
-                    <div class="xe-widget xe-counter-block xe-counter-block-purple"  data-count=".num" data-from="0" data-to="512" data-duration="3">
+                    <div class="xe-widget xe-counter-block xe-counter-block-purple"  data-count=".num" data-from="0" data-to="376" data-duration="3">
                         <div class="xe-upper">
 
                             <div class="xe-icon">
-                                <i class="linecons-camera"></i>
+                                <i class="linecons-clock"></i>
                             </div>
                             <div class="xe-label">
                                 <strong class="num">0</strong>
-                                <span>Photos Taken</span>
+                                <span>Solar Panel Hours - This Month</span>
                             </div>
 
                         </div>
@@ -1213,7 +1212,7 @@ $(function () {
                             <div class="border"></div>
 
                             <span>Increase</span>
-                            <strong>512 more photos</strong>
+                            <strong>8% Increase over last month</strong>
                         </div>
                     </div>
 
@@ -1221,22 +1220,22 @@ $(function () {
 
                 <div class="col-sm-3">
 
-                    <div class="xe-widget xe-counter-block xe-counter-block-blue"  data-suffix="k" data-count=".num" data-from="0" data-to="310" data-duration="4" data-easing="false">
+                    <div class="xe-widget xe-counter-block xe-counter-block-green"  data-prefix="$" data-count=".num" data-from="0" data-to="3210" data-duration="4" data-easing="false">
                         <div class="xe-upper">
 
                             <div class="xe-icon">
-                                <i class="linecons-user"></i>
+                                <i class="fa-dollar"></i>
                             </div>
                             <div class="xe-label">
                                 <strong class="num">0k</strong>
-                                <span>Daily Visits</span>
+                                <span>Utility Bill Savings</span>
                             </div>
 
                         </div>
                         <div class="xe-lower">
                             <div class="border"></div>
 
-                            <span>Bounce Rate</span>
+                            <span>Solar Panel Electricty / % of Total</span>
                             <strong>51.55%</strong>
                         </div>
                     </div>
@@ -1252,16 +1251,17 @@ $(function () {
                                 <i class="fa-life-ring"></i>
                             </div>
                             <div class="xe-label">
-                                <strong class="num">24/7</strong>
-                                <span>Live Support</span>
+                                <strong class="num">3</strong>
+                                <span>Monthly Faults Detected</span>
+                                
                             </div>
 
                         </div>
                         <div class="xe-lower">
                             <div class="border"></div>
 
-                            <span>Tickets Opened</span>
-                            <strong  data-count="this" data-from="0" data-to="14215" data-duration="2">0</strong>
+                            <span>Cases Created for this Location</span>
+                            <strong  data-count="this" data-from="0" data-to="12" data-duration="2">0</strong>
                         </div>
                     </div>
 
@@ -1269,7 +1269,7 @@ $(function () {
 
                 <div class="col-sm-3">
 
-                    <div class="xe-widget xe-progress-counter xe-progress-counter-pink " data-count=".num" data-from="0" data-to="12425" data-duration="2">
+                    <div class="xe-widget xe-progress-counter xe-progress-counter-pink " data-count=".num" data-from="0" data-to="435" data-duration="2">
 
                         <div class="xe-background">
                             <i class="linecons-heart"></i>
@@ -1277,21 +1277,21 @@ $(function () {
 
                         <div class="xe-upper">
                             <div class="xe-icon">
-                                <i class="linecons-heart"></i>
+                                <i class="fa-calendar-o"></i>
                             </div>
                             <div class="xe-label">
-                                <span>likes</span>
+                                <span>Battery Charging Cycles</span>
                                 <strong class="num">0</strong>
                             </div>
                         </div>
 
                         <div class="xe-progress">
-                            <span class="xe-progress-fill"  data-fill-from="0" data-fill-to="56" data-fill-unit="%" data-fill-property="width" data-fill-duration="2" data-fill-easing="true"></span>
+                            <span class="xe-progress-fill"  data-fill-from="0" data-fill-to="87" data-fill-unit="%" data-fill-property="width" data-fill-duration="2" data-fill-easing="true"></span>
                         </div>
 
                         <div class="xe-lower">
-                            <span>Likes p/ Month</span>
-                            <strong>41% more likes</strong>
+                            <span>Battery Life Estimate</span>
+                            <strong>87% Battery Cycles. Estimated Replacement 2 Months</strong>
                         </div>
 
                     </div>
@@ -1479,7 +1479,7 @@ $(function () {
 
                 <div class="col-sm-3">
 
-                    <div class="xe-widget xe-counter-block xe-counter-block-yellow"  data-count=".num" data-from="0" data-to="512" data-duration="3">
+                    <div class="xe-widget xe-counter-block xe-counter-block-yellow"  data-count=".num" data-from="0" data-to="376" data-duration="3">
                         <div class="xe-upper">
 
                             <div class="xe-icon">
@@ -1487,7 +1487,7 @@ $(function () {
                             </div>
                             <div class="xe-label">
                                 <strong class="num">0</strong>
-                                <span>Photos Taken</span>
+                                <span>Solar Panel Hours</span>
                             </div>
 
                         </div>
@@ -1495,7 +1495,7 @@ $(function () {
                             <div class="border"></div>
 
                             <span>Increase</span>
-                            <strong>512 more photos</strong>
+                            <strong>8% over last month</strong>
                         </div>
                     </div>
 

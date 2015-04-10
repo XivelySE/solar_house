@@ -50,6 +50,31 @@ router.get('/markers/batterycurrent', function(req, res, next) {
     });
 });
 
+// Panel Watts - OK
+router.get('/markers/panelwatts', function(req, res, next) {
+
+    pg.getMeasures('PanelWatts', function(rows) {
+
+        console.log('PanelWatts:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+// Panel Current - OK
+router.get('/markers/panelcurrent', function(req, res, next) {
+
+    pg.getMeasures('PanelCurrent', function(rows) {
+
+        console.log('PanelCurrent:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
+
+
 // Appliance Current - OK
 router.get('/markers/appliancecurrent', function(req, res, next) {
 
@@ -62,7 +87,17 @@ router.get('/markers/appliancecurrent', function(req, res, next) {
     });
 });
 
+// Appliance Current - OK
+router.get('/markers/appliancewatts', function(req, res, next) {
 
+    pg.getMeasures('ApplianceWatts', function(rows) {
+
+        console.log('ApplianceWatts:');
+        console.log(rows);
+
+        res.send(rows);
+    });
+});
 
 // Backup Voltage - OK
 router.get('/markers/backupvoltage', function(req, res, next) {
