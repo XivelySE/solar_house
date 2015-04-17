@@ -1,12 +1,12 @@
 var mqtt = require('mqtt');
 var pg = require('./pg.js');
+var config = require('./config.js');
 
-var host = 'xitest.broker.xrm.xively.com';
-var port = 1883;
-var username = "edd7358b-9505-44b5-ab93-04ec89de2dbc";
-var password = "lW4X8e3PDUF9iOBuAIgaXQ==";
-var topicPrefix = "/de289e01-cc13-11e4-a698-0a1f2727d969/solardemo/panel0001";
-// var topicPrefix = "/de289e01-cc13-11e4-a698-0a1f2727d969/solardemo/panel1008";
+var host = config.mqtt.host;
+var port = config.mqtt.port;
+var username = config.mqtt.username;
+var password = config.mqtt.password;
+var topicPrefix = config.mqtt.topic;
 
 var client = mqtt.connect({
    host: host,

@@ -1,11 +1,12 @@
 var pg = require('pg');
+var config = require('./config.js');
 
 options = {
-    user: "putujooxlyfpep",
-    password: "uO1GsyvEHAx5lRAVTJA23X_fAD",
-    database: "d2incm6jg4v8nm",
-    port: 5432,
-    host: "ec2-23-21-73-32.compute-1.amazonaws.com",
+    user: config.db.username,
+    password: config.db.password,
+    database: config.db.database,
+    port: config.db.port,
+    host: config.db.host,
     ssl: true
 }
 
