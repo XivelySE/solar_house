@@ -20,16 +20,19 @@ exports.connectMQTT = function(req, res) {
 
    // Listening to messages on the mqtt queue
    console.log("Connecting to Broker");
+   //console.log(client);
    client.on('connect', function() {
       console.log("Connected");
       client.subscribe(topicPrefix);
+      }, function(err) {
+         console.log(err);
    });
 
    client.on('message', function(topic, message) {
 
       //console.log(topic);
       result = JSON.parse(message.toString());
-      // console.log(result);
+      console.log(result);
 
       for (i = 0; i < result.length; i ++) {
 

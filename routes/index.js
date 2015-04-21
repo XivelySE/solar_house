@@ -67,7 +67,7 @@ router.get('/markers/panelcurrent', function(req, res, next) {
 
     pg.getMeasures('PanelCurrent', function(rows) {
 
-        console.log('PanelCurrent:');
+        console.log('PanelCurrent:TEST');
         console.log(rows);
 
         res.send(rows);
