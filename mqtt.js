@@ -72,7 +72,7 @@ exports.connectMQTT = function(req, res) {
 
 exports.switchLightON = function() {
 
-   var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "1"}';
+   var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
    //console.log(packet);
    client.publish(topicPrefix, packet, function() {
       //success('Published. Now what')
@@ -81,7 +81,7 @@ exports.switchLightON = function() {
 
 exports.switchLightOFF = function() {
 
-   var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "0"}';
+   var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
    //console.log(packet);
    client.publish(topicPrefix, packet, function() {
       //success('Published. Now what')
