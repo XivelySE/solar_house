@@ -30,7 +30,7 @@ exports.connectMQTT = function(req, res) {
 
     client.on('message', function(topic, message) {
 
-        return;
+        //return;
 
         //console.log(topic);
         result = JSON.parse(message.toString());
