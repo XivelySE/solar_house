@@ -86,9 +86,9 @@ $(function () {
                         var series = this.series[0];
                         setInterval(function () {
 
-                            $.get('/markers/panelcurrent', function(data){
+                            $.get('/markers/panelwatts', function(data){
 
-                                // console.log(data.timestamp);
+                                console.log(data.timestamp);
 
                                 var x = new Date(data.timestamp).getTime();
                                 var y = data.settingvalue;
