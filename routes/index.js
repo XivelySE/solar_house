@@ -24,6 +24,13 @@ router.get('/markers', function(req, res, next) {
 
 });
 
+// INCREMENT BATTERY CYCLES
+router.get('/button/increment', function(req, res, next) {
+
+    mqtt.incrementBatteryCharge();
+    res.send('ok');
+});
+
 // TURN ON BUTTON
 router.get('/button/on', function(req, res, next) {
 

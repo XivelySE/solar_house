@@ -29,7 +29,7 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
                     console.log(err);
                     throw err;
                 } else {
-                    console.log('INSERT COMPLETED');
+                    // console.log('INSERT COMPLETED');
                 }
             });
         }
@@ -73,8 +73,7 @@ exports.getLocations = function(success, error) {
 
 exports.createCase = function(panelId, settingType, settingValue, success, error) {
 
-    var query = 'INSERT INTO salesforce.case(status, origin, description) VALUES($1, $2, $3)';
-    var description = 'Battery Charge Reached ' + settingValue;
+    var query = 'INSERT INTO salesforce.case(status, origin, description) VALUES($1, $2, $3)'
 
     pg.connect(options, function(err, pgClient, done) {
 
@@ -84,8 +83,6 @@ exports.createCase = function(panelId, settingType, settingValue, success, error
 
             if (err) {
                 return err;
-            } else {
-                success(result.rows);
             }
         });
     });
@@ -93,8 +90,9 @@ exports.createCase = function(panelId, settingType, settingValue, success, error
 
 exports.createOpportunity = function(panelId, settingType, settingValue, success, error) {
 
-    var query = 'INSERT INTO salesforce.opportunity(name, stagename, closedate) VALUES($1, $2, $3)';
-
+    var description = 'Battery Charge Reached ' + settingValue;
+    var query = 'INSERT INTO salesforce.opportunity(name, stagename, closedate, description) VALUES($1, $2, $3, $4)';
+    
     pg.connect(options, function(err, pgClient, done) {
 
         pgClient.query(query, ['Test', 'Prospecting', new Date()], function(err, result) {
@@ -103,9 +101,23 @@ exports.createOpportunity = function(panelId, settingType, settingValue, success
 
             if (err) {
                 return err;
-            } else {
-                success(result.rows);
             }
+        });
+    });
+}
+
+exports.incrementPanelAsset = function(panelId, success, error) {
+
+    var query = 'UPDATE salesforce.opportunity SET Battery_Cycle_Incremented__c = true From salesforce.Asset WHERE SerialNumber = $1';
+    console.log(query);
+    pg.connect(options, function(err, pgClient, done) {
+
+        pgClient.query(query, [panelId], function(err, result) {
+            //call `done()` to release the client back to the pool
+            done();
+            if (err) {
+                return err;
+            }            
         });
     });
 }

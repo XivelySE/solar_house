@@ -30,15 +30,12 @@ exports.connectMQTT = function(req, res) {
 
     client.on('message', function(topic, message) {
 
-        return;
-
-        //console.log(topic);
         result = JSON.parse(message.toString());
         console.log(result);
 
         for (i = 0; i < result.length; i++) {
 
-            console.log(result[i]);
+            // console.log(result[i]);
 
             try {
 
@@ -48,26 +45,25 @@ exports.connectMQTT = function(req, res) {
                     panelValue = result[i].value;
                     panelSetting = result[i].variableName;
 
+                    if (panelSetting == 'BatteryCycle') {
+                        pg.incrementPanelAsset(panelId);                           
+                        
+                    }
+
                     if (panelSetting == 'ErrorConditionON') {
-                        console.log(panelId + " " + panelSetting + " " + panelValue);
-                        pg.createOpportunity();
+                        // console.log(panelId + " " + panelSetting + " " + panelValue);
+                        pg.createCase(panelId, panelSetting, fixedValue);
                     }
 
                     if (panelSetting == 'ErrorConditionOFF') {
-                        console.log(panelId + " " + panelSetting + " " + panelValue);
+                        // console.log(panelId + " " + panelSetting + " " + panelValue);
                     }
 
-                    if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' &&
-                        panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
+                    if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' && panelSetting != 'BatteryCycle' &&
+                            panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
 
                         var fixedValue = panelValue.toFixed(2);
-
                         pg.saveSetting(panelId, panelSetting, fixedValue);
-
-                        if (panelSetting == 'BatteryCycle' && fixedValue >= 500) {
-
-                            pg.createCase(panelId, panelSetting, fixedValue);
-                        }
                     }
                 }
             } catch (e) {
@@ -79,9 +75,19 @@ exports.connectMQTT = function(req, res) {
 
 }
 
-exports.switchLightON = function() {
+exports.incrementBatteryCharge = function() {
 
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
+    var packet = '{"packetType": "sensor", "variableName": "BatteryCycle", "value": "1"}';
+    //console.log(packet);
+    client.publish(topicPrefix, packet, function() {
+        //success('Published. Now what')
+        console.log('Published. Now what');
+    });
+}
+
+exports.switchLightOFF = function() {
+
+    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
@@ -90,7 +96,7 @@ exports.switchLightON = function() {
 
 exports.switchLightOFF = function() {
 
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
+    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
