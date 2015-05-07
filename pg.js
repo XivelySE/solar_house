@@ -74,7 +74,7 @@ exports.getLocations = function(success, error) {
 exports.createCase = function(panelId, settingType, settingValue, success, error) {
 
     var query = 'INSERT INTO salesforce.case(status, origin, description) VALUES($1, $2, $3)';
-    var description = 'Battery Charge Reached ' + settingValue;
+    var description = 'Battery Charge Cycles Reached ' + settingValue;
 
     pg.connect(options, function(err, pgClient, done) {
 
@@ -85,7 +85,7 @@ exports.createCase = function(panelId, settingType, settingValue, success, error
             if (err) {
                 return err;
             } else {
-                success(result.rows);
+                //success(result.rows);
             }
         });
     });
