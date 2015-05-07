@@ -95,7 +95,7 @@ exports.switchLightOFF = function() {
     });
 }
 
-exports.switchLightOFF = function() {
+exports.switchLightON = function() {
 
     var packet = '[{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}]';
     //console.log(packet);
