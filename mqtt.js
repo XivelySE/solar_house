@@ -31,11 +31,8 @@ exports.connectMQTT = function(req, res) {
     client.on('message', function(topic, message) {
 
         result = JSON.parse(message.toString());
-        console.log(result);
 
         for (i = 0; i < result.length; i++) {
-
-            // console.log(result[i]);
 
             try {
 
@@ -81,7 +78,7 @@ exports.connectMQTT = function(req, res) {
 
 exports.incrementBatteryCharge = function() {
 
-    var packet = '{"packetType": "sensor", "variableName": "BatteryCycle", "value": "1"}';
+    var packet = '[{"packetType": "sensor", "variableName": "BatteryCycle", "value": "1"}]';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
@@ -91,7 +88,7 @@ exports.incrementBatteryCharge = function() {
 
 exports.switchLightOFF = function() {
 
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
+    var packet = '[{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}]';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
@@ -100,7 +97,7 @@ exports.switchLightOFF = function() {
 
 exports.switchLightOFF = function() {
 
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
+    var packet = '[{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}]';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')

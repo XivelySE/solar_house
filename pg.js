@@ -110,7 +110,7 @@ exports.createOpportunity = function(panelId, settingType, settingValue, success
 
 exports.incrementPanelAsset = function(panelId, success, error) {
 
-    var query = 'UPDATE salesforce.opportunity SET Battery_Cycle_Incremented__c = true From salesforce.Asset WHERE SerialNumber = $1';
+    var query = 'UPDATE salesforce.asset SET Battery_Cycle_Incremented__c = true WHERE SerialNumber = $1';
     console.log(query);
     pg.connect(options, function(err, pgClient, done) {
 
@@ -119,6 +119,8 @@ exports.incrementPanelAsset = function(panelId, success, error) {
             done();
             if (err) {
                 return err;
+            } else {
+                console.log(result);
             }            
         });
     });
