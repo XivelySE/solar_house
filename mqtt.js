@@ -50,7 +50,7 @@ exports.connectMQTT = function(req, res) {
 
                     if (panelSetting == 'ErrorConditionON') {
                         console.log(panelId + " " + panelSetting + " " + panelValue);
-                        pg.createOpportunity();
+                        pg.createCase(panelId, panelSetting, fixedValue);
                     }
 
                     if (panelSetting == 'ErrorConditionOFF') {
@@ -65,8 +65,7 @@ exports.connectMQTT = function(req, res) {
                         pg.saveSetting(panelId, panelSetting, fixedValue);
 
                         if (panelSetting == 'BatteryCycle' && fixedValue >= 500) {
-
-                            pg.createCase(panelId, panelSetting, fixedValue);
+                            pg.createOpportunity();
                         }
                     }
                 }
