@@ -108,7 +108,7 @@ exports.simulatePanelErrorOFF = function() {
 
 exports.switchLightOFF = function() {
 
-    var packet = '[{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}]';
+    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
@@ -117,7 +117,7 @@ exports.switchLightOFF = function() {
 
 exports.switchLightON = function() {
 
-    var packet = '[{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}]';
+    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
