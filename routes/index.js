@@ -25,9 +25,23 @@ router.get('/markers', function(req, res, next) {
 });
 
 // INCREMENT BATTERY CYCLES
-router.get('/button/increment', function(req, res, next) {
+router.get('/button/cycle', function(req, res, next) {
 
-    mqtt.incrementBatteryCharge();
+    mqtt.incrementBatteryCycle();
+    res.send('ok');
+});
+
+// SIMULATE PANEL ERROR ON
+router.get('/button/error-on', function(req, res, next) {
+
+    mqtt.simulatePanelErrorON();
+    res.send('ok');
+});
+
+// SIMULATE PANEL ERROR OFF
+router.get('/button/error-off', function(req, res, next) {
+
+    mqtt.simulatePanelErrorOFF();
     res.send('ok');
 });
 

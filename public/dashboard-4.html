@@ -62,6 +62,33 @@ $(function () {
         $(".button-on").show();
     });
 
+    $(".button-cycle").click(function(){
+
+        $.get("/button/cycle", function(response) {
+
+        });
+    });
+
+    $(".button-error-on").click(function(){
+
+        $.get("/button/error-on", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-error-off").show();
+    });
+
+    $(".button-error-off").click(function(){
+
+        $.get("/button/error-off", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-error-on").show();
+    });
+
 });
 
 
@@ -1151,10 +1178,20 @@ $(function () {
 
                 <div class="row">
 
-                    <div class="col-sm-4" style="margin: 1em 0em;"></div>
+                    <!--<div class="col-sm-4" style="margin: 1em 0em;"></div> -->
+
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-on btn-block btn-info">Turn on the light</button>
-                        <button class="button-off btn-block btn-info" style="display:none">Turn off the light</button>
+                        <button class="button-on btn-block btn-info">Turn ON the light</button>
+                        <button class="button-off btn-block btn-info" style="display:none">Turn OFF the light</button>
+                    </div>
+
+                    <div class="col-sm-4" style="margin: 1em 0em;">
+                        <button class="button-cycle btn-block btn-info">Simulate Battery Charge Cycle</button>
+                    </div>
+                
+                    <div class="col-sm-4" style="margin: 1em 0em;">
+                        <button class="button-error-on btn-block btn-info">Simulate Panel Error</button>
+                        <button class="button-error-off btn-block btn-info" style="display:none">Repair Simulated Error</button>
                     </div>
 
                 </div>

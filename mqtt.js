@@ -76,13 +76,33 @@ exports.connectMQTT = function(req, res) {
 
 }
 
-exports.incrementBatteryCharge = function() {
+exports.incrementBatteryCycle = function() {
 
     var packet = '[{"packetType": "sensor", "variableName": "BatteryCycle", "value": "1"}]';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
-        console.log('Published. Now what');
+        //console.log('Published. Now what');
+    });
+}
+
+exports.simulatePanelErrorON = function() {
+
+    var packet = '[{"packetType": "sensor", "variableName": "ErrorConditionON", "value": "Simulated Error"}]';
+    //console.log(packet);
+    client.publish(topicPrefix, packet, function() {
+        //success('Published. Now what')
+        //console.log('Published. Now what');
+    });
+}
+
+exports.simulatePanelErrorOFF = function() {
+
+    var packet = '[{"packetType": "sensor", "variableName": "ErrorConditionOFF", "value": "Simulated Error"}]';
+    //console.log(packet);
+    client.publish(topicPrefix, packet, function() {
+        //success('Published. Now what')
+        //console.log('Published. Now what');
     });
 }
 
