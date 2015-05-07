@@ -90,11 +90,11 @@
 	            var bounds = new google.maps.LatLngBounds();
 	            $.each(data, function(index, elem){
 
-	                console.log(elem.latitude);
-	                console.log(elem.longitude);
+	                console.log(elem.location__latitude__s);
+	                console.log(elem.location__longitude__s);
 
 	                var marker = new google.maps.Marker({
-	                    position: new google.maps.LatLng(elem.latitude, elem.longitude),
+	                    position: new google.maps.LatLng(elem.location__latitude__s, elem.location__longitude__s),
 	                    map: map,
 	                    // icon: markerIcon,
 	                    //optimized: false,
@@ -115,7 +115,6 @@
 	                });
 
 	                map.setCenter(marker.getPosition());
-
 	            });
 
 	            map.fitBounds(bounds);
@@ -1437,7 +1436,7 @@
 		});
 		</script>
 
-		<ul class="chat-conversations list-unstyled">
+		<ul class="chat-conversations list-unstyled" style="display:none">
 
 			<!-- Extra Chat Conversations collected not to exceed window width -->
 			<li class="browse-more">
@@ -1615,12 +1614,6 @@
 			</li>
 
 		</ul>
-
-		<a href="#" class="mobile-chat-toggle">
-			<i class="linecons-comment"></i>
-			<span class="num">6</span>
-			<span class="badge badge-purple">4</span>
-		</a>
 
 	<!-- End: Footer Sticked Chat -->
 	</div>

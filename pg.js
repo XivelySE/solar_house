@@ -17,8 +17,7 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
         if (err) {
             console.log(err);
 
-        }
-        else {
+        } else {
 
             var query = 'INSERT INTO locationlogs(locationid, panelid, settingtype, settingvalue, timestamp) values($1, $2, $3, $4, $5)';
 
@@ -29,11 +28,9 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
                 if (err) {
                     console.log(err);
                     throw err;
-                }
-                else {
+                } else {
                     console.log('INSERT COMPLETED');
                 }
-
             });
         }
 
@@ -44,17 +41,12 @@ exports.getMeasures = function(settingType, success, error) {
 
     pg.connect(options, function(err, pgClient, done) {
 
-        pgClient.query('SELECT timestamp, settingtype, settingvalue FROM locationlogs WHERE settingtype = $1 ORDER BY timestamp DESC LIMIT 1',
-                        [settingType], function(err, result) {
-
+        pgClient.query('SELECT timestamp, settingtype, settingvalue FROM locationlogs WHERE settingtype = $1 ORDER BY timestamp DESC LIMIT 1', [settingType], function(err, result) {
 
             done();
-
             if (err) {
-
                 error(err);
-            }
-            else {
+            } else {
                 success(result.rows[0]);
             }
         });
@@ -65,21 +57,55 @@ exports.getLocations = function(success, error) {
 
     pg.connect(options, function(err, pgClient, done) {
 
-        pgClient.query('SELECT * FROM locations', function(err, result) {
+        pgClient.query('SELECT * FROM salesforce.account', function(err, result) {
             //call `done()` to release the client back to the pool
             done();
 
             if (err) {
-
-                pgClient.end();
                 return err;
-            }
-            else {
-
+            } else {
                 success(result.rows);
-
             }
         });
     });
 
+}
+
+exports.createCase = function(panelId, settingType, settingValue, success, error) {
+
+    var query = 'INSERT INTO salesforce.case(status, origin, description) VALUES($1, $2, $3)';
+    var description = 'Battery Charge Reached ' + settingValue;
+
+    pg.connect(options, function(err, pgClient, done) {
+
+        pgClient.query(query, ['New', 'Web', description], function(err, result) {
+            //call `done()` to release the client back to the pool
+            done();
+
+            if (err) {
+                return err;
+            } else {
+                success(result.rows);
+            }
+        });
+    });
+}
+
+exports.createOpportunity = function(panelId, settingType, settingValue, success, error) {
+
+    var query = 'INSERT INTO salesforce.opportunity(name, stagename, closedate) VALUES($1, $2, $3)';
+
+    pg.connect(options, function(err, pgClient, done) {
+
+        pgClient.query(query, ['Test', 'Prospecting', new Date()], function(err, result) {
+            //call `done()` to release the client back to the pool
+            done();
+
+            if (err) {
+                return err;
+            } else {
+                success(result.rows);
+            }
+        });
+    });
 }
