@@ -62,8 +62,8 @@ router.get('/markers/panelwatts', function(req, res, next) {
 
     pg.getMeasures('PanelWatts', function(rows) {
 
-        console.log('PanelWatts:');
-        console.log(rows);
+      //  console.log('PanelWatts:');
+      //  console.log(rows);
 
         res.send(rows);
     });
@@ -74,13 +74,21 @@ router.get('/markers/panelcurrent', function(req, res, next) {
 
     pg.getMeasures('PanelCurrent', function(rows) {
 
-        console.log('PanelCurrent:TEST');
-        console.log(rows);
-
         res.send(rows);
     });
 });
 
+// Panel Watts - OK
+router.get('/markers/panelwatts', function(req, res, next) {
+
+    pg.getMeasures('PanelWatts', function(rows) {
+
+        // console.log('PanelWatts:TEST');
+        // console.log(rows);
+
+        res.send(rows);
+    });
+});
 
 // Appliance Current - OK
 router.get('/markers/appliancecurrent', function(req, res, next) {
@@ -93,6 +101,19 @@ router.get('/markers/appliancecurrent', function(req, res, next) {
         res.send(rows);
     });
 });
+
+// Appliance Current - OK
+router.get('/markers/appliancewatts', function(req, res, next) {
+
+    pg.getMeasures('ApplianceWatts', function(rows) {
+
+        // console.log('ApplianceCurrent:');
+        // console.log(rows);
+
+        res.send(rows);
+    });
+});
+
 
 // Appliance Current - OK
 router.get('/markers/appliancewatts', function(req, res, next) {
