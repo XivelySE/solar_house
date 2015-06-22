@@ -62,11 +62,22 @@ $(function () {
         $(".button-on").show();
     });
 
-    $(".button-cycle").click(function(){
+    $(".button-cycle-on").click(function(){
 
-        $.get("/button/cycle", function(response) {
+        $.get("/button/cycle-on", function(response) {
 
         });
+        $(this).hide();
+        $(".button-error-off").show();
+    });
+
+    $(".button-cycle-off").click(function(){
+
+        $.get("/button/cycle-off", function(response) {
+
+        });
+        $(this).hide();
+        $(".button-error-on").show();
     });
 
     $(".button-error-on").click(function(){
@@ -1186,7 +1197,8 @@ $(function () {
                     </div>
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-cycle btn-block btn-info">Simulate Battery Charge Cycle</button>
+                        <button class="button-cycle-on btn-block btn-info">Simulate Battery End of Life</button>
+                        <button class="button-cycle-off btn-block btn-info">Simulate Battery Replacement</button>
                     </div>
                 
                     <div class="col-sm-4" style="margin: 1em 0em;">

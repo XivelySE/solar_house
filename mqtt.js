@@ -42,29 +42,42 @@ exports.connectMQTT = function(req, res) {
                     panelValue = result[i].value;
                     panelSetting = result[i].variableName;
 
-                    if (panelSetting == 'BatteryCycle') {
-                        pg.incrementPanelAsset(panelId);                           
+                    if (panelSetting == 'SalesConditionON') {
+                        pg.createOpportunity();
                         
                     }
 
-                    if (panelSetting == 'ErrorConditionON') {
+
+                    if(panelSetting == 'SalesConditionOFF')
+                    {
+
+                    }
+
+                    if (panelSetting == 'ErrorConditionON') 
+                    {
                         console.log(panelId + " " + panelSetting + " " + panelValue);
                         pg.createCase(panelId, panelSetting, fixedValue);
                     }
 
-                    if (panelSetting == 'ErrorConditionOFF') {
-                        // console.log(panelId + " " + panelSetting + " " + panelValue);
+                    if (panelSetting == 'ErrorConditionOFF') 
+                    {
+                        
                     }
 
-                    if (panelSetting != 'ErrorConditionON' && panelSetting != 'SetAppliance' && panelSetting != 'BatteryCycle' &&
-                            panelSetting != 'SetSource' && panelSetting != 'BatteryCharging' && panelSetting != 'ErrorConditionOFF') {
+                    if(panelSetting == 'SetAppliance')
+                    {
+                        //TODO toggle lights
+                    }
 
+                    if (panelSetting == 'PanelWatts') {
                         var fixedValue = panelValue.toFixed(2);
                         pg.saveSetting(panelId, panelSetting, fixedValue);
+                    }
 
-                        if (panelSetting == 'BatteryCycle' && fixedValue >= 500) {
-                            pg.createOpportunity();
-                        }
+                    if(panelSetting == 'ApplianceWatts')
+                    {
+                        var fixedValue = panelValue.toFixed(2);
+                        pg.saveSetting(panelId, panelSetting, fixedValue);
                     }
                 }
             } catch (e) {
