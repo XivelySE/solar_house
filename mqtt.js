@@ -69,12 +69,14 @@ exports.connectMQTT = function(req, res) {
                     }
 
                     if (panelSetting == 'PanelWatts') {
+                        console.log('Saving PanelWatts value to db');
                         var fixedValue = panelValue.toFixed(2);
                         pg.saveSetting(panelId, panelSetting, fixedValue);
                     }
 
                     if(panelSetting == 'ApplianceWatts')
                     {
+                        console.log('Saving ApplianceWatts value to db');
                         var fixedValue = panelValue.toFixed(2);
                         pg.saveSetting(panelId, panelSetting, fixedValue);
                     }
