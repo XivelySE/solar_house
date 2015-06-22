@@ -47,10 +47,9 @@ exports.connectMQTT = function(req, res) {
                         
                     }
 
-
                     if(panelSetting == 'SalesConditionOFF')
                     {
-
+                        //Do nothing
                     }
 
                     if (panelSetting == 'ErrorConditionON') 
@@ -61,7 +60,7 @@ exports.connectMQTT = function(req, res) {
 
                     if (panelSetting == 'ErrorConditionOFF') 
                     {
-                        
+                        //Do nothing
                     }
 
                     if(panelSetting == 'SetAppliance')
@@ -112,6 +111,26 @@ exports.simulatePanelErrorON = function() {
 exports.simulatePanelErrorOFF = function() {
 
     var packet = '[{"packetType": "sensor", "variableName": "ErrorConditionOFF", "value": "Simulated Error"}]';
+    //console.log(packet);
+    client.publish(topicPrefix, packet, function() {
+        //success('Published. Now what')
+        //console.log('Published. Now what');
+    });
+}
+
+exports.simulateBatteryEOL = function() {
+
+    var packet = '[{"packetType": "sensor", "variableName": "SalesConditionON", "value": "Sales Cycle"}]';
+    //console.log(packet);
+    client.publish(topicPrefix, packet, function() {
+        //success('Published. Now what')
+        //console.log('Published. Now what');
+    });
+}
+
+exports.simulateBatteryReplace = function() {
+
+    var packet = '[{"packetType": "sensor", "variableName": "SalesConditionOFF", "value": "Sales Cycle"}]';
     //console.log(packet);
     client.publish(topicPrefix, packet, function() {
         //success('Published. Now what')
