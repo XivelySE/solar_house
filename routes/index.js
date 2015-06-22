@@ -24,37 +24,24 @@ router.get('/markers', function(req, res, next) {
 
 });
 
-// INCREMENT BATTERY CYCLES
-router.get('/button/cycle', function(req, res, next) {
-
-    mqtt.incrementBatteryCycle();
-    res.send('ok');
-});
-
-// SIMULATE PANEL ERROR ON
-router.get('/button/error-on', function(req, res, next) {
+// SIMULATE PANEL ERROR ON / ERROR OFF
+router.get('/button/error', function(req, res, next) {
 
     mqtt.simulatePanelErrorON();
     res.send('ok');
 });
 
-// SIMULATE PANEL ERROR OFF
-router.get('/button/error-off', function(req, res, next) {
+// BATTERY EOL & REPLACEMENT
+router.get('/button/service', function(req, res, next) {
 
-    mqtt.simulatePanelErrorOFF();
+    mqtt.toggleSales();
     res.send('ok');
 });
 
-// TURN ON BUTTON
-router.get('/button/on', function(req, res, next) {
 
-    mqtt.switchLightON();
-    res.send('ok');
-});
-
-router.get('/button/off', function(req, res, next) {
-
-    mqtt.switchLightOFF();
+// TOGGLE LIGHTS
+router.get('/button/light', function(req, res, next) {
+    mqtt.toggleLight();
     res.send('ok');
 });
 

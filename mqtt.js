@@ -7,6 +7,7 @@ var port = config.mqtt.port;
 var username = config.mqtt.username;
 var password = config.mqtt.password;
 var topicPrefix = config.mqtt.topic;
+var cmdTopic = config.mqtt.cmd;
 
 var client = mqtt.connect({
     host: host,
@@ -87,71 +88,14 @@ exports.connectMQTT = function(req, res) {
     });
 
 }
-
-exports.incrementBatteryCycle = function() {
-
-    var packet = '[{"packetType": "sensor", "variableName": "BatteryCycle", "value": "1"}]';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-        //console.log('Published. Now what');
-    });
+exports.toggleService = function() {
+    client.publish(cmdTopic, 'SERVICE');
 }
 
-exports.simulatePanelErrorON = function() {
-
-    var packet = '[{"packetType": "sensor", "variableName": "ErrorConditionON", "value": "Simulated Error"}]';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-        //console.log('Published. Now what');
-    });
+exports.toggleSales = function() {
+    client.publish(topicPrefix, 'SALES');
 }
 
-exports.simulatePanelErrorOFF = function() {
-
-    var packet = '[{"packetType": "sensor", "variableName": "ErrorConditionOFF", "value": "Simulated Error"}]';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-        //console.log('Published. Now what');
-    });
-}
-
-exports.simulateBatteryEOL = function() {
-
-    var packet = '[{"packetType": "sensor", "variableName": "SalesConditionON", "value": "Sales Cycle"}]';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-        //console.log('Published. Now what');
-    });
-}
-
-exports.simulateBatteryReplace = function() {
-
-    var packet = '[{"packetType": "sensor", "variableName": "SalesConditionOFF", "value": "Sales Cycle"}]';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-        //console.log('Published. Now what');
-    });
-}
-
-exports.switchLightOFF = function() {
-
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "OFF"}';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-    });
-}
-
-exports.switchLightON = function() {
-
-    var packet = '{"packetType": "command", "variableName": "SetAppliance", "value": "ON"}';
-    //console.log(packet);
-    client.publish(topicPrefix, packet, function() {
-        //success('Published. Now what')
-    });
+exports.toggleLights = function() {
+    client.publish(topicPrefix, 'LIGHTS');
 }
