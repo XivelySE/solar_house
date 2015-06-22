@@ -44,7 +44,7 @@ $(function () {
 
     $(".button-on").click(function(){
 
-        $.get("/button/on", function(response) {
+        $.get("/button/lights", function(response) {
 
         });
 
@@ -54,7 +54,7 @@ $(function () {
 
     $(".button-off").click(function(){
 
-        $.get("/button/off", function(response) {
+        $.get("/button/lights", function(response) {
 
         });
 
@@ -62,42 +62,42 @@ $(function () {
         $(".button-on").show();
     });
 
-    $(".button-cycle-on").click(function(){
+    $(".button-sales-on").click(function(){
 
-        $.get("/button/cycle-on", function(response) {
+        $.get("/button/sales", function(response) {
 
         });
         $(this).hide();
-        $(".button-error-off").show();
+        $(".button-sales-off").show();
     });
 
-    $(".button-cycle-off").click(function(){
+    $(".button-sales-off").click(function(){
 
-        $.get("/button/cycle-off", function(response) {
+        $.get("/button/sales", function(response) {
 
         });
         $(this).hide();
-        $(".button-error-on").show();
+        $(".button-sales-on").show();
     });
 
-    $(".button-error-on").click(function(){
+    $(".button-service-on").click(function(){
 
-        $.get("/button/error-on", function(response) {
+        $.get("/button/service", function(response) {
 
         });
 
         $(this).hide();
-        $(".button-error-off").show();
+        $(".button-service-off").show();
     });
 
-    $(".button-error-off").click(function(){
+    $(".button-service-off").click(function(){
 
-        $.get("/button/error-off", function(response) {
+        $.get("/button/service", function(response) {
 
         });
 
         $(this).hide();
-        $(".button-error-on").show();
+        $(".button-service-on").show();
     });
 
 });
@@ -1197,13 +1197,13 @@ $(function () {
                     </div>
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-cycle-on btn-block btn-info">Simulate Battery End of Life</button>
-                        <button class="button-cycle-off btn-block btn-info">Simulate Battery Replacement</button>
+                        <button class="button-sales-on btn-block btn-info">Simulate Battery End of Life</button>
+                        <button class="button-sales-off btn-block btn-info">Simulate Battery Replacement</button>
                     </div>
                 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-error-on btn-block btn-info">Simulate Panel Error</button>
-                        <button class="button-error-off btn-block btn-info" style="display:none">Repair Simulated Error</button>
+                        <button class="button-service-on btn-block btn-info">Simulate Panel Error</button>
+                        <button class="button-service-off btn-block btn-info" style="display:none">Repair Simulated Error</button>
                     </div>
 
                 </div>
