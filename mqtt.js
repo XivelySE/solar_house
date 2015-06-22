@@ -6,7 +6,7 @@ var host = config.mqtt.host;
 var port = config.mqtt.port;
 var username = config.mqtt.username;
 var password = config.mqtt.password;
-var topicPrefix = config.mqtt.topic;
+var subscribeTopic = config.mqtt.subscribe;
 var cmdTopic = config.mqtt.cmd;
 
 var client = mqtt.connect({
@@ -24,7 +24,7 @@ exports.connectMQTT = function(req, res) {
     //console.log(client);
     client.on('connect', function() {
         console.log("Connected");
-        client.subscribe(topicPrefix);
+        client.subscribe(subscribeTopic);
     }, function(err) {
         console.log(err);
     });
@@ -93,9 +93,13 @@ exports.toggleService = function() {
 }
 
 exports.toggleSales = function() {
-    client.publish(topicPrefix, 'SALES');
+    client.publish(cmdTopic, 'SALES');
 }
 
 exports.toggleLights = function() {
-    client.publish(topicPrefix, 'LIGHTS');
+    client.publish(cmdTopic, 'LIGHTS');
+}
+
+exports.toggleFan = function() {
+    client.publish(cmdTopic, 'FAN');
 }

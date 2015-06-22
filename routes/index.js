@@ -45,6 +45,12 @@ router.get('/button/lights', function(req, res, next) {
     res.send('ok');
 });
 
+// FAN ON AND OFF 
+router.get('/button/fan', function(req, res, next) {
+    mqtt.toggleFan();
+    res.send('ok');
+});
+
 // GET MEASURE ROUTES
 // Battery Current
 router.get('/markers/batterycurrent', function(req, res, next) {

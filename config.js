@@ -18,15 +18,8 @@ config.mqtt.username = process.env.MQTT_USERNAME || '25357715-c40c-444a-9f9a-b08
 config.mqtt.password = process.env.MQTT_PASSWORD || 'QBW+ULkkVXyYNETLLwxJmg==';
 
 //Gavin device 1
-config.mqtt.subscribe = process.env.MQTT_TOPIC_SUB || 'xi/blue/v1/9860a5f8-3b12-4086-963c-2830ce434835/d/93a1ce68-f61a-4be6-8bca-3353b81db1eb/solar_house';
+config.mqtt.subscribe = process.env.MQTT_TOPIC_SUB || "xi/blue/v1/9860a5f8-3b12-4086-963c-2830ce434835/d/08cabace-9065-4224-871a-c6302ad62b6f/solar_house";
 
-config.mqtt.cmd = process.env.MQTT_TOPIC_CMD || 'xi/blue/v1/9860a5f8-3b12-4086-963c-2830ce434835/d/93a1ce68-f61a-4be6-8bca-3353b81db1eb/solar_house/cmd';
+config.mqtt.cmd = process.env.MQTT_TOPIC_CMD || "xi/blue/v1/9860a5f8-3b12-4086-963c-2830ce434835/d/08cabace-9065-4224-871a-c6302ad62b6f/solar_house/cmd";
 
 module.exports = config;
-
-
-//2b6f
-
-//1fe1
-//b1eb
-//6056
