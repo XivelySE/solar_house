@@ -30,7 +30,7 @@ exports.connectMQTT = function(req, res) {
     });
 
     client.on('message', function(topic, message) {
-
+    try{
         result = JSON.parse(message.toString());
 
         for (i = 0; i < result.length; i++) {
@@ -45,7 +45,6 @@ exports.connectMQTT = function(req, res) {
 
                     if (panelSetting == 'SalesConditionON') {
                         pg.createOpportunity();
-                        
                     }
 
                     if(panelSetting == 'SalesConditionOFF')
@@ -84,22 +83,28 @@ exports.connectMQTT = function(req, res) {
                 console.log('Issue when receiving message');
             }
         }
-
+        } catch(e) {
+            console.log('Couldnt parse message');
+        }
     });
 
 }
 exports.toggleService = function() {
+    console.log('publishing SERVICE');
     client.publish(cmdTopic, 'SERVICE');
 }
 
 exports.toggleSales = function() {
+    console.log('publishing SALES');
     client.publish(cmdTopic, 'SALES');
 }
 
 exports.toggleLights = function() {
+    console.log('publishing LIGHTS');
     client.publish(cmdTopic, 'LIGHTS');
 }
 
 exports.toggleFan = function() {
+    console.log('publishing FAN')
     client.publish(cmdTopic, 'FAN');
 }
