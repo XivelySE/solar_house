@@ -27,7 +27,7 @@ router.get('/markers', function(req, res, next) {
 // SIMULATE PANEL ERROR ON / ERROR OFF
 router.get('/button/service', function(req, res, next) {
 
-    mqtt.simulatePanelErrorON();
+    mqtt.toggleService();
     res.send('ok');
 });
 
@@ -41,7 +41,7 @@ router.get('/button/sales', function(req, res, next) {
 
 // TOGGLE LIGHTS
 router.get('/button/lights', function(req, res, next) {
-    mqtt.toggleLight();
+    mqtt.toggleLights();
     res.send('ok');
 });
 
@@ -50,10 +50,6 @@ router.get('/button/lights', function(req, res, next) {
 router.get('/markers/batterycurrent', function(req, res, next) {
 
     pg.getMeasures('BatteryCurrent', function(rows) {
-
-        // console.log('BatteryCurrent:');
-        // console.log(rows);
-
         res.send(rows);
     });
 });
@@ -79,18 +75,6 @@ router.get('/markers/panelcurrent', function(req, res, next) {
     });
 });
 
-// Panel Watts - OK
-router.get('/markers/panelwatts', function(req, res, next) {
-
-    pg.getMeasures('PanelWatts', function(rows) {
-
-        // console.log('PanelWatts:TEST');
-        // console.log(rows);
-
-        res.send(rows);
-    });
-});
-
 // Appliance Current - OK
 router.get('/markers/appliancecurrent', function(req, res, next) {
 
@@ -110,19 +94,6 @@ router.get('/markers/appliancewatts', function(req, res, next) {
 
         // console.log('ApplianceCurrent:');
         // console.log(rows);
-
-        res.send(rows);
-    });
-});
-
-
-// Appliance Current - OK
-router.get('/markers/appliancewatts', function(req, res, next) {
-
-    pg.getMeasures('ApplianceWatts', function(rows) {
-
-        console.log('ApplianceWatts:');
-        console.log(rows);
 
         res.send(rows);
     });
