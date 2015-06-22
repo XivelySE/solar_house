@@ -4,11 +4,11 @@ config.db = {};
 config.mqtt = {};
 
 
-config.db.host = process.env.DB_HOST || 'ec2-54-204-20-209.compute-1.amazonaws.com';
+config.db.host = process.env.DB_HOST || 'ec2-23-21-73-32.compute-1.amazonaws.com';
 config.db.port = process.env.DB_PORT || 5432;
-config.db.username = process.env.DB_USERNAME || 'wxojivwlaigntn';
-config.db.password = process.env.DB_PASSWORD || 'O3J4D6W1xjoODGCQKStcEU4EEN';
-config.db.database = process.env.DB_NAME || 'datavivc428g43';
+config.db.username = process.env.DB_USERNAME || 'putujooxlyfpep';
+config.db.password = process.env.DB_PASSWORD || 'uO1GsyvEHAx5lRAVTJA23X_fAD';
+config.db.database = process.env.DB_NAME || 'd2incm6jg4v8nm';
 
 config.mqtt.host = process.env.MQTT_HOST || 'broker.xively.com';
 config.mqtt.port = process.env.MQTT_PORT || 1883;
