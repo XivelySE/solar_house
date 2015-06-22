@@ -100,6 +100,26 @@ $(function () {
         $(".button-service-on").show();
     });
 
+    $(".button-fan-on").click(function(){
+
+        $.get("/button/fan", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-fan-off").show();
+    });
+
+    $(".button-fan-off").click(function(){
+
+        $.get("/button/fan", function(response) {
+
+        });
+
+        $(this).hide();
+        $(".button-fan-on").show();
+    });
+
 });
 
 
@@ -1204,6 +1224,11 @@ $(function () {
                     <div class="col-sm-4" style="margin: 1em 0em;">
                         <button class="button-service-on btn-block btn-info">Simulate Panel Error</button>
                         <button class="button-service-off btn-block btn-info" style="display:none">Repair Simulated Error</button>
+                    </div>
+
+                    <div class="col-sm-4" style="margin: 1em 0em;">
+                        <button class="button-fan-on btn-block btn-info">Turn Fan On</button>
+                        <button class="button-fan-off btn-block btn-info" style="display:none">Turn Fan Off</button>
                     </div>
 
                 </div>
