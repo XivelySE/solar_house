@@ -33,15 +33,13 @@ exports.connectMQTT = function(req, res) {
     try{
         result = JSON.parse(message.toString());
 
-        for (i = 0; i < result.length; i++) {
-
             try {
 
-                if (result[i].packetType == 'sensor') {
-
+                if (result.packetType == 'sensor') {
+                    console.log('Got sensor reading');
                     panelId = 1008;
-                    panelValue = result[i].value;
-                    panelSetting = result[i].variableName;
+                    panelValue = result.value;
+                    panelSetting = result.variableName;
 
                     if (panelSetting == 'SalesConditionON') {
                         pg.createOpportunity();
@@ -55,7 +53,7 @@ exports.connectMQTT = function(req, res) {
                     if (panelSetting == 'ErrorConditionON') 
                     {
                         console.log(panelId + " " + panelSetting + " " + panelValue);
-                        pg.createCase(panelId, panelSetting, fixedValue);
+                        pg.createCase(panelId, panelSetting, panelValue);
                     }
 
                     if (panelSetting == 'ErrorConditionOFF') 
@@ -70,21 +68,18 @@ exports.connectMQTT = function(req, res) {
 
                     if (panelSetting == 'PanelWatts') {
                         console.log('Saving PanelWatts value to db');
-                        var fixedValue = panelValue.toFixed(2);
-                        pg.saveSetting(panelId, panelSetting, fixedValue);
+                        pg.saveSetting(panelId, panelSetting, panelValue);
                     }
 
                     if(panelSetting == 'ApplianceWatts')
                     {
                         console.log('Saving ApplianceWatts value to db');
-                        var fixedValue = panelValue.toFixed(2);
-                        pg.saveSetting(panelId, panelSetting, fixedValue);
+                        pg.saveSetting(panelId, panelSetting, panelValue);
                     }
                 }
             } catch (e) {
-                console.log('Issue when receiving message');
+                console.log(e);
             }
-        }
         } catch(e) {
             console.log('Couldnt parse message');
         }
