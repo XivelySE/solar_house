@@ -47,19 +47,6 @@ $(function () {
         $.get("/button/lights", function(response) {
 
         });
-
-        $(this).hide();
-        $(".button-off").show();
-    });
-
-    $(".button-off").click(function(){
-
-        $.get("/button/lights", function(response) {
-
-        });
-
-        $(this).hide();
-        $(".button-on").show();
     });
 
     $(".button-sales-on").click(function(){
@@ -105,19 +92,6 @@ $(function () {
         $.get("/button/fan", function(response) {
 
         });
-
-        $(this).hide();
-        $(".button-fan-off").show();
-    });
-
-    $(".button-fan-off").click(function(){
-
-        $.get("/button/fan", function(response) {
-
-        });
-
-        $(this).hide();
-        $(".button-fan-on").show();
     });
 
 });
@@ -1212,13 +1186,11 @@ $(function () {
                     <!--<div class="col-sm-4" style="margin: 1em 0em;"></div> -->
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-on btn-block btn-info">Turn Lights On</button>
-                        <button class="button-off btn-block btn-info" style="display:none">Turn Lights Off</button>
+                        <button class="button-on btn-block btn-info">Lights Control</button>
                     </div>
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-fan-on btn-block btn-info">Turn Fan On</button>
-                        <button class="button-fan-off btn-block btn-info" style="display:none">Turn Fan Off</button>
+                        <button class="button-fan-on btn-block btn-info">Fan Control</button>
                     </div>
 
                 </div>
