@@ -39,7 +39,6 @@ exports.connectMQTT = function(req, res) {
             try {
 
                 if (result.packetType == 'sensor') {
-                    console.log('Got sensor reading');
                     panelId = 1008;
                     panelValue = result.value;
                     panelSetting = result.variableName;
@@ -74,13 +73,11 @@ exports.connectMQTT = function(req, res) {
                     // }
 
                     if (panelSetting == 'PanelWatts') {
-                        console.log('Saving PanelWatts value to db');
                         pg.saveSetting(panelId, panelSetting, panelValue);
                     }
 
                     if(panelSetting == 'ApplianceWatts')
                     {
-                        console.log('Saving ApplianceWatts value to db');
                         pg.saveSetting(panelId, panelSetting, panelValue);
                     }
                 }
