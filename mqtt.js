@@ -9,6 +9,9 @@ var password = config.mqtt.password;
 var subscribeTopic = config.mqtt.subscribe;
 var cmdTopic = config.mqtt.cmd;
 
+var lightAlert = null;
+var fanAlert = null;
+
 var client = mqtt.connect({
     host: host,
     port: port,
@@ -63,8 +66,12 @@ exports.connectMQTT = function(req, res) {
 
                     if(panelSetting == 'SetAppliance')
                     {
-                        //TODO toggle lights
+                        lightAlert();
                     }
+
+                    // if(panelSetting == 'Fan'){
+                    //     fanAlert();
+                    // }
 
                     if (panelSetting == 'PanelWatts') {
                         console.log('Saving PanelWatts value to db');
@@ -104,4 +111,12 @@ exports.toggleLights = function() {
 exports.toggleFan = function() {
     console.log('publishing FAN')
     client.publish(cmdTopic, 'FAN');
+}
+
+exports.setLightAlert = function(_lightAlert){
+    lightAlert = _lightAlert;
+}
+
+exports.setFanAlert = function(_fanAlert){
+    fanAlert = _fanAlert;
 }

@@ -31,6 +31,7 @@
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 
 <!-- begin highcharts script -->
 <script type='text/javascript'>//<![CDATA[
@@ -39,14 +40,35 @@ chartRPM = undefined;
 chartAmbTemp = undefined;
 chartTemp = undefined;
 
+var socket = io(window.location.host);
+
+socket.on('light', function(){
+    $(".button-light-off").toggle();
+    $(".button-light-on").toggle();
+});
+
+socket.on('fan', function(){
+    $(".button-light-off").toggle();
+    $(".button-light-on").toggle();
+});
 
 $(function () {
 
-    $(".button-on").click(function(){
+    $(".button-light-on").click(function(){
 
         $.get("/button/lights", function(response) {
 
         });
+        $(this).hide();
+        $(".button-light-off").show();
+    });
+    $(".button-light-off").click(function(){
+
+        $.get("/button/lights", function(response) {
+
+        });
+        $(this).hide();
+        $(".button-light-on").show();
     });
 
     $(".button-sales-on").click(function(){
@@ -90,8 +112,16 @@ $(function () {
     $(".button-fan-on").click(function(){
 
         $.get("/button/fan", function(response) {
-
         });
+        $(this).hide();
+        $(".button-fan-off").show();
+    });
+    $(".button-fan-off").click(function(){
+
+        $.get("/button/fan", function(response) {
+        });
+        $(this).hide();
+        $(".button-fan-on").show();
     });
 
 });
@@ -140,13 +170,17 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'watts'
+                    text: 'output'
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0.0,
+                max: 2500,
+                startOnTick: false,
+                endOnTick: false
             },
             tooltip: {
                 formatter: function () {
@@ -211,13 +245,17 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'watts'
+                    text: 'consumption'
                 },
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
-                }]
+                }],
+                min: 0.0,
+                max: 2500,
+                startOnTick: false,
+                endOnTick: false
             },
             tooltip: {
                 formatter: function () {
@@ -1186,11 +1224,13 @@ $(function () {
                     <!--<div class="col-sm-4" style="margin: 1em 0em;"></div> -->
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-on btn-block btn-info">Lights Control</button>
+                        <button class="button-light-on btn-block btn-info">Turn Lights On</button>
+                        <button class="button-light-off btn-block btn-info" style="display:none">Turn Lights Off</button>
                     </div>
 
                     <div class="col-sm-4" style="margin: 1em 0em;">
-                        <button class="button-fan-on btn-block btn-info">Fan Control</button>
+                        <button class="button-fan-on btn-block btn-info">Turn Fan On</button>
+                        <button class="button-fan-off btn-block btn-info" style="display:none">Turn Fan Off</button>
                     </div>
 
                 </div>

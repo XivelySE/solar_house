@@ -1,13 +1,20 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 var mqttCustomer = require('./mqtt.js');
+mqttCustomer.setLightAlert(function(){
+  io.emit('lights');
+});
+mqttCustomer.setFanAlert(function(){
+  io.emit('fan');
+});
 mqttCustomer.connectMQTT();
-
 var routes = require('./routes/index');
 
 global.__base = __dirname + '/';
