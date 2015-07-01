@@ -40,7 +40,7 @@ chartRPM = undefined;
 chartAmbTemp = undefined;
 chartTemp = undefined;
 
-var socket = io.connect(window.location.host);
+var socket = io.connect();
 
 socket.on('light', function(){
     $(".button-light-off").toggle();
