@@ -28,6 +28,7 @@ router.get('/markers', function(req, res, next) {
 router.get('/button/service', function(req, res, next) {
 
     mqtt.toggleService();
+    pg.createCase(1008, 'ErrorConditionON', '');
     res.send('ok');
 });
 
