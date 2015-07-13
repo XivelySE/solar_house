@@ -42,14 +42,24 @@ chartTemp = undefined;
 
 var socket = io.connect();
 
-socket.on('light', function(){
-    $(".button-light-off").toggle();
-    $(".button-light-on").toggle();
+socket.on('light', function(value){
+    if(value == 'ON'){
+        $(".button-light-off").show();
+        $(".button-light-on").hide();
+    } else {
+        $(".button-light-off").hide();
+        $(".button-light-on").show();
+    }
 });
 
-socket.on('fan', function(){
-    $(".button-light-off").toggle();
-    $(".button-light-on").toggle();
+socket.on('fan', function(value){
+    if(value == 'ON'){
+        $(".button-fan-off").show();
+        $(".button-fan-on").hide();
+    } else {
+        $(".button-fan-off").hide();
+        $(".button-fan-on").show();
+    }
 });
 
 $(function () {

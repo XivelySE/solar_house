@@ -65,12 +65,12 @@ exports.connectMQTT = function(req, res) {
 
                     if(panelSetting == 'SetAppliance')
                     {
-                        lightAlert();
+                        lightAlert(result.value);
                     }
 
-                    // if(panelSetting == 'Fan'){
-                    //     fanAlert();
-                    // }
+                    if(panelSetting == 'Fan'){
+                        fanAlert(result.value);
+                    }
 
                     if (panelSetting == 'PanelWatts') {
                         pg.saveSetting(panelId, panelSetting, panelValue);

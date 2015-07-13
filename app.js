@@ -17,11 +17,11 @@ io.on('connection', function(socket){
   console.log("Connection received");
 });
 
-mqttCustomer.setLightAlert(function(){
-  io.emit('lights');
+mqttCustomer.setLightAlert(function(value){
+  io.emit('lights', value);
 });
-mqttCustomer.setFanAlert(function(){
-  io.emit('fan');
+mqttCustomer.setFanAlert(function(value){
+  io.emit('fan', value);
 });
 mqttCustomer.connectMQTT();
 var routes = require('./routes/index');
