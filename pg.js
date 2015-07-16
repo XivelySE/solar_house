@@ -27,7 +27,6 @@ exports.saveSetting = function(panelId, settingType, settingValue) {
 
                 if (err) {
                     console.log(err);
-                    throw err;
                 } else {
                     // console.log('INSERT COMPLETED');
                 }
