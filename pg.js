@@ -56,7 +56,7 @@ exports.getLocations = function(success, error) {
 
     pg.connect(options, function(err, pgClient, done) {
 
-        pgClient.query('SELECT * FROM locations', function(err, result) {
+        pgClient.query('SELECT * FROM salesforce.account', function(err, result) {
             //call `done()` to release the client back to the pool
             done();
 
