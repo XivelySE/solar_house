@@ -63,12 +63,12 @@ exports.connectMQTT = function(req, res) {
                         //Do nothing
                     }
 
-                    if(panelSetting == 'SetAppliance')
+                    if(panelSetting == 'SetLights')
                     {
                         lightAlert(result.value);
                     }
 
-                    if(panelSetting == 'Fan'){
+                    if(panelSetting == 'SetFan'){
                         fanAlert(result.value);
                     }
 
