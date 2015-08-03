@@ -42,7 +42,8 @@ chartTemp = undefined;
 
 var socket = io.connect();
 
-socket.on('light', function(value){
+socket.on('lights', function(value){
+    console.log("LIGHT event received with value " + value);
     if(value == 'ON'){
         $(".button-light-off").show();
         $(".button-light-on").hide();
@@ -53,6 +54,7 @@ socket.on('light', function(value){
 });
 
 socket.on('fan', function(value){
+    console.log("FAN event received with value " + value);
     if(value == 'ON'){
         $(".button-fan-off").show();
         $(".button-fan-on").hide();
