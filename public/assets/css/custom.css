@@ -9,3 +9,20 @@ body {
 
 a {
 }
+
+/*.button-light-on {
+    background-color: blue;
+}
+
+.button-light-off {
+    background-color: #FADF9D;
+    color: black;
+}
+
+.button-light-on:hover{
+};
+
+.button-light-off:hover{
+        background-color: #FADF9D;
+    color: black;
+};*/

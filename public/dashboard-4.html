@@ -64,6 +64,28 @@ socket.on('fan', function(value){
     }
 });
 
+socket.on('service',function(value){
+    console.log("SERVICE event received with value " + value);
+    if(value == "ON"){
+        $(".button-service-on").hide();
+        $(".button-service-off").show();
+    } else{ 
+        $(".button-service-on").show();
+        $(".button-service-off").hide();
+    }
+});
+
+socket.on('sales', function(value){
+    console.log("SALES event received with value " + value);
+    if(value == "ON"){
+        $(".button-sales-on").hide();
+        $(".button-sales-off").show();
+    } else{ 
+        $(".button-sales-on").show();
+        $(".button-sales-off").hide();
+    }
+});
+
 $(function () {
 
     $(".button-light-on").click(function(){

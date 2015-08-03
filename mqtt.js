@@ -11,6 +11,8 @@ var cmdTopic = config.mqtt.cmd;
 
 var lightAlert = null;
 var fanAlert = null;
+var serviceAlert = null;
+var salesAlert = null;
 
 var client = mqtt.connect({
     host: host,
@@ -45,22 +47,24 @@ exports.connectMQTT = function(req, res) {
 
                     if (panelSetting == 'SalesConditionON') {
                         pg.createOpportunity();
+                        salesAlert("ON");
                     }
 
                     if(panelSetting == 'SalesConditionOFF')
                     {
-                        //Do nothing
+                        salesAlert("OFF");
                     }
 
                     if (panelSetting == 'ErrorConditionON') 
                     {
                         console.log(panelId + " " + panelSetting + " " + panelValue);
                         pg.createCase(panelId, panelSetting, panelValue);
+                        serviceAlert("ON");
                     }
 
                     if (panelSetting == 'ErrorConditionOFF') 
                     {
-                        //Do nothing
+                        serviceAlert("OFF");
                     }
 
                     if(panelSetting == 'SetLights')
@@ -116,4 +120,12 @@ exports.setLightAlert = function(_lightAlert){
 
 exports.setFanAlert = function(_fanAlert){
     fanAlert = _fanAlert;
+}
+
+exports.setSalesAlert = function(_salesAlert){
+    salesAlert = _salesAlert;
+}
+
+exports.setServiceAlert = function(_serviceAlert){
+    serviceAlert = _serviceAlert;
 }

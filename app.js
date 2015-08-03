@@ -23,6 +23,12 @@ mqttCustomer.setLightAlert(function(value){
 mqttCustomer.setFanAlert(function(value){
   io.emit('fan', value);
 });
+mqttCustomer.setSalesAlert(function(value){
+  io.emit('sales', value);
+});
+mqttCustomer.setServiceAlert(function(value){
+  io.emit('service', value);
+});
 mqttCustomer.connectMQTT();
 var routes = require('./routes/index');
 
