@@ -14,8 +14,8 @@ config.mqtt.host = process.env.MQTT_HOST || 'broker.xively.com';
 config.mqtt.port = process.env.MQTT_PORT || 1883;
 
 //Gavin device 4
-config.mqtt.username = process.env.MQTT_USERNAME || '25357715-c40c-444a-9f9a-b08f2ac86056'; 
-config.mqtt.password = process.env.MQTT_PASSWORD || 'QBW+ULkkVXyYNETLLwxJmg==';
+config.mqtt.username = process.env.MQTT_USERNAME || '6a3ec5d3-a188-41ff-bebd-0cbe80cbd29d'; 
+config.mqtt.password = process.env.MQTT_PASSWORD || 'Basic ZWRlODk3ZGNkZmM5ZGI3NmM2MDA0ZDgzMDlhMTg3ZDA6ZGE1MWYxNWYxM2Q2MWFjNDQzMTllZmUxZGYyZGZkZDc=';
 
 //Gavin device 1
 config.mqtt.subscribe = process.env.MQTT_TOPIC_SUB || "xi/blue/v1/9860a5f8-3b12-4086-963c-2830ce434835/d/08cabace-9065-4224-871a-c6302ad62b6f/solar_house";
